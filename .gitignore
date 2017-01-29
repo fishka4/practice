@@ -1,0 +1,24 @@
+# eclipse
+.classpath
+.project
+.settings
+bin
+
+# idea
+*.idea
+*.iml
+
+# maven
+*/target/
+
+# gradle
+*.gradle
+build
+
+*.orig
+*.ipr
+*.iws
+accounts_dump.txt
+tests_count.txt
+tl_export/
+accounts_statistic.txt
