@@ -1,7 +1,7 @@
 <suite name="Suite1" verbose="1" parallel="methods" thread-count="4" >
     <test name="My practice"  >
         <classes>
-            <class name="org.automation.practice.GoogleSearch" />
+            <class name="org.automation.practice.tests.GoogleSearch" />
         </classes>
     </test>
 

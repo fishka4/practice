@@ -1,10 +1,13 @@
 package org.automation.practice;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 /**
  * Created by alexanderzaverukha on 1/29/17.
@@ -16,10 +19,10 @@ public abstract class WebBase {
    public void beforeMethod(){
        RemoteWebDriver driver = (RemoteWebDriver)createDriver(System.getProperty("selenium.browser", "chrome"));
        this.driver.set(driver);
-       openApp();
+       getDriver().get(getAppURL());
    }
 
-   protected abstract void  openApp();
+   protected abstract String getAppURL();
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
@@ -54,6 +57,16 @@ public abstract class WebBase {
             driver.get().quit();
         }
 
+    }
+
+//    @Attachment
+//    public String performedActions(ActionSequence actionSequence) {
+//        return actionSequence.toString();
+//    }
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] makeScreenshot() {
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
 
