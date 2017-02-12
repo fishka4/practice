@@ -34,6 +34,10 @@ public class Google extends WebBase implements Searchable {
 
     }
 
+    public void search(String search, String option){
+
+    }
+
     @Override
     protected String getAppURL() {
         return "http://www.google.com";

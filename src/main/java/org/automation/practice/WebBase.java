@@ -1,5 +1,6 @@
 package org.automation.practice;
 
+import org.automation.practice.listeners.TestListener;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -12,10 +13,11 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 /**
  * Created by alexanderzaverukha on 1/29/17.
  */
+@Listeners(value = {TestListener.class})
 public abstract class WebBase {
-   private ThreadLocal<RemoteWebDriver>  driver = new ThreadLocal<>();
+    static public ThreadLocal<RemoteWebDriver>  driver = new ThreadLocal<>();
 
-   @BeforeMethod
+   @BeforeMethod(alwaysRun = true)
    public void beforeMethod(){
        RemoteWebDriver driver = (RemoteWebDriver)createDriver(System.getProperty("selenium.browser", "chrome"));
        this.driver.set(driver);
@@ -51,7 +53,7 @@ public abstract class WebBase {
         return driver.get();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod(){
         if(driver != null){
             driver.get().quit();
@@ -70,7 +72,7 @@ public abstract class WebBase {
     }
 
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void afterSuite(){
 
     }

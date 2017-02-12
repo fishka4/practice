@@ -26,4 +26,8 @@ public class YouTube extends WebBase implements Searchable{
             }
         });
     }
+
+    public void search(String search, String option){
+
+    }
 }
