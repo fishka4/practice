@@ -1,8 +1,7 @@
-<suite name="Suite1" verbose="1" parallel="methods" thread-count="4" >
+<suite name="Suite1" verbose="1" parallel="methods" thread-count="4" data-provider-thread-count="5">
     <test name="My practice"  >
         <classes>
-            <class name="org.automation.practice.tests.GoogleSearch" />
+            <class name="org.automation.practice.tests.AmazonSearch" />
         </classes>
     </test>
-
 </suite>

@@ -20,9 +20,8 @@ public class AmazonSearch extends Amazon {
         };
     }
 
-    @DataProvider(name = "google-sheet", parallel = false)
+    @DataProvider(name = "google-sheet", parallel = true)
     public Object[][] googleSheetDP() throws IOException {
-             System.setProperty("webdriver.chrome.driver", "/Users/alexander/Software/chromedriver");
             String spreadsheetId = "1bYdMstIpN9n8SGQJsG030peb3TPoRC8XvmZMYPhejd4";
             String range = "Sheet1!A:B";
             return GoogleSheets.getData(spreadsheetId, range);
@@ -33,7 +32,6 @@ public class AmazonSearch extends Amazon {
 
     @Test(dataProvider = "google-sheet")
     public void myTest(String search, String option){
-
         search( search,  option);
         System.out.println("Page title is: " + getDriver().getTitle());
     }
