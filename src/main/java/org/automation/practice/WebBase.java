@@ -28,57 +28,20 @@ import java.util.Properties;
 /**
  * Created by alexanderzaverukha on 1/29/17.
  */
-@Listeners(value = {TestListener.class})
-public abstract class WebBase {
+
+public abstract class WebBase implements AutoCloseable {
     Logger logger = LoggerFactory.getLogger(WebBase.class);
     static public ThreadLocal<RemoteWebDriver>  driver = new ThreadLocal<>();
 
-
-   @BeforeMethod(alwaysRun = true)
-   public void beforeMethod(){
-       RemoteWebDriver driver = (RemoteWebDriver)createDriver(System.getProperty("selenium.browser", "chrome"));
-       this.driver.set(driver);
-       getDriver().get(getAppURL());
-   }
+    public WebBase(){
+        RemoteWebDriver driver = (RemoteWebDriver)createDriver(System.getProperty("selenium.browser", "chrome"));
+        this.driver.set(driver);
+        getDriver().get(getAppURL());
+    }
 
    protected abstract String getAppURL();
 
-    @BeforeSuite(alwaysRun = true)
-    public void beforeSuite() {
-        initConfig();
 
-
-    }
-
-    private void initConfig() {
-        boolean configEnabled = Boolean.valueOf(System.getProperty("config.enabled", "true"));
-        if(!configEnabled) {
-            return;
-        }
-
-        Properties properties = new Properties();
-        String configPath = System.getProperty("config.path", "");
-        if(configPath.isEmpty()){
-            String path = WebBase.class.getClass().getResource("/").toString().replaceAll("target.*", "");
-            configPath = path + "config.properties";
-        }
-        try(FileInputStream fileInputStream = new FileInputStream(new File(new URI(configPath)))){
-            properties.load(fileInputStream);
-
-            for(Map.Entry<Object, Object> values : properties.entrySet()){
-                String key = (String) values.getKey();
-                String value = (String) values.getValue();
-                System.setProperty(key, value);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
 
     private WebDriver createDriver(String browser) {
         boolean isRemote = Boolean.valueOf(System.getProperty("selenium.remote", "false"));
@@ -114,12 +77,11 @@ public abstract class WebBase {
 
     }
 
-    protected RemoteWebDriver getDriver(){
+    public static RemoteWebDriver getDriver(){
         return driver.get();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod(){
+    public void close(){
         if(driver != null){
             driver.get().quit();
         }

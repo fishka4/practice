@@ -10,6 +10,11 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Created by alexanderzaverukha on 1/29/17.
  */
 public class YouTube extends WebBase implements Searchable{
+
+    public YouTube(){
+        super();
+    }
+
     protected String getAppURL() {
         return "http://www.youtube.com";
     }

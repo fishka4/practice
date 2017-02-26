@@ -13,6 +13,11 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Created by alexanderzaverukha on 2/4/17.
  */
 public class Amazon extends WebBase implements Searchable{
+
+    public Amazon(){
+        super();
+    }
+
     @Override
     protected String getAppURL() {
         return "http://www.amazon.com";

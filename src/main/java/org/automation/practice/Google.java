@@ -11,6 +11,11 @@ import ru.yandex.qatools.allure.annotations.Step;
  * Created by alexanderzaverukha on 1/29/17.
  */
 public class Google extends WebBase implements Searchable {
+
+    public Google(){
+        super();
+    }
+
     @Step("Search {0}")
     public void search(String search){
 
