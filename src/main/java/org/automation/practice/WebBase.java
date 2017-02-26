@@ -1,5 +1,6 @@
 package org.automation.practice;
 
+import org.apache.xpath.operations.Bool;
 import org.automation.practice.listeners.TestListener;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -44,6 +45,17 @@ public abstract class WebBase {
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
+        initConfig();
+
+
+    }
+
+    private void initConfig() {
+        boolean configEnabled = Boolean.valueOf(System.getProperty("config.enabled", "true"));
+        if(!configEnabled) {
+            return;
+        }
+
         Properties properties = new Properties();
         String configPath = System.getProperty("config.path", "");
         if(configPath.isEmpty()){
@@ -66,8 +78,6 @@ public abstract class WebBase {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private WebDriver createDriver(String browser) {
