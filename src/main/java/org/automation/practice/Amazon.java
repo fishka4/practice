@@ -28,11 +28,14 @@ public class Amazon extends WebBase implements Searchable{
     public void search(String search) {
         // Find the text input element by its name
         WebElement element = getDriver().findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
+        makeScreenshot();
         // Enter something to search for
         element.sendKeys(search);
+        makeScreenshot();
 
         // Now submit the form. WebDriver will find the form for us from the element
         element.submit();
+        makeScreenshot();
 
         (new WebDriverWait(getDriver(), 10)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
@@ -41,6 +44,7 @@ public class Amazon extends WebBase implements Searchable{
                 return title.startsWith(search);
             }
         });
+        makeScreenshot();
 
     }
 
