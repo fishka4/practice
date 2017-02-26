@@ -30,7 +30,7 @@ public class AmazonSearch extends Amazon {
 
 
 
-    @Test(dataProvider = "google-sheet")
+    @Test(dataProvider = "amazon-search-dataprovider")
     public void myTest(String search, String option){
         search( search,  option);
         System.out.println("Page title is: " + getDriver().getTitle());
