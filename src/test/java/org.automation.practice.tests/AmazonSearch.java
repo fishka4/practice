@@ -15,12 +15,10 @@ import java.io.IOException;
  */
 public class AmazonSearch extends TestBase{
 
-    @DataProvider(name = "amazon-search-dataprovider", parallel = true)
+    @DataProvider(name = "amazon-search-dataprovider", parallel = false)
     public Object[][] searchData() {
         return new Object[][] {
-                { "Google", "Raspberry Pi 3", "Electronics"},
-                { "Youtube","Raspberry Pi 3", "Electronics"},
-                { "Amazon","Raspberry Pi 3", "Electronics"}
+                { "Amazon", "Raspberry Pi 3", "Electronics"}
 
         };
     }

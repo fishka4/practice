@@ -78,6 +78,15 @@
             <version>v4-rev459-1.22.0</version>
         </dependency>
 
+        <!--HTML ELEMENTS -->
+        <dependency>
+            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <artifactId>htmlelements-java</artifactId>
+            <version>1.17</version>
+        </dependency>
+
+        <!--END HTML ELEMENTS -->
+
     </dependencies>
 
     <build>
